@@ -13,6 +13,31 @@ namespace Delegates
     {
         static void Main(string[] args)
         {
+            //DelegateDemo();
+            Calculator calculator = new Calculator();
+            Func<int, int, int> func = calculator.Sum;
+            Console.WriteLine(func(3, 4));
+
+            Func<int> getRandomNumber = delegate ()
+            {
+                Random random = new Random();
+                return random.Next(1, 100);
+            };
+
+            Func<int> getRandomNumber2 = () => new Random().Next(1, 100);
+
+            Console.WriteLine(getRandomNumber2());
+
+
+            
+
+            Console.ReadLine();
+        }
+
+        
+
+        private static void DelegateDemo()
+        {
             CustomerManager customerManager = new CustomerManager();
             MyDelegate myDelegate1 = customerManager.SendMessage;
             myDelegate1 += customerManager.ShowAlert;
@@ -28,13 +53,12 @@ namespace Delegates
             var result = myDelegate3(1, 3);
 
             Console.WriteLine(result);
-            Console.ReadLine();
         }
     }
 
     public class Calculator
     {
-        public int Sum(int number1,int number2)
+        public int Sum(int number1, int number2)
         {
             return number1 + number2;
         }
@@ -42,6 +66,11 @@ namespace Delegates
         public int Multiply(int number1, int number2)
         {
             return number1 * number2;
+        }
+
+        public int GetRandomNumber(int min, int max)
+        {
+            return new Random().Next(min, max);
         }
     }
 
